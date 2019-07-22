@@ -56,7 +56,7 @@ public class AdmobRewardPlugin: NSObject, FlutterPlugin {
             rewardVideo.delegate = delegates[id]
             break
         case "load":
-            loadRewardBasedVideoAd(id: id, rewardBasedVideoAdUnitId: adUnitId)
+            loadRewardBasedVideoAd(args, id: id, rewardBasedVideoAdUnitId: adUnitId)
             result(nil)
             break
         case "isLoaded":
@@ -84,10 +84,14 @@ public class AdmobRewardPlugin: NSObject, FlutterPlugin {
         }
     }
     
-    private func loadRewardBasedVideoAd(id: Int, rewardBasedVideoAdUnitId: String) {
+    private func loadRewardBasedVideoAd(_ args: [String: Any], id: Int, rewardBasedVideoAdUnitId: String) {
         let interstantial = getRewardBasedVideoAd(id: id)
         let request = GADRequest()
-        request.testDevices = [kGADSimulatorID]
+        var testDevices = [kGADSimulatorID]
+        if let testDeviceId = args["testDeviceId"] {
+            testDevices.append(testDeviceId)
+        }
+        request.testDevices = testDevices
         interstantial.load(request, withAdUnitID: rewardBasedVideoAdUnitId)
     }
     

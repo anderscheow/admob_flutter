@@ -53,7 +53,7 @@ public class AdmobIntersitialPlugin: NSObject, FlutterPlugin {
             break
         case "load":
             allIds[id] = getInterstitialAd(id: id, interstantialAdUnitId: adUnitId)
-            loadInterstantialAd(id: id, interstantialAdUnitId: adUnitId)
+            loadInterstantialAd(args, id: id, interstantialAdUnitId: adUnitId)
             result(nil)
             break
         case "isLoaded":
@@ -77,10 +77,13 @@ public class AdmobIntersitialPlugin: NSObject, FlutterPlugin {
         }
     }
     
-    private func loadInterstantialAd(id: Int, interstantialAdUnitId: String) {
+    private func loadInterstantialAd(_ args: [String: Any], id: Int, interstantialAdUnitId: String) {
         let interstantial = getInterstitialAd(id: id, interstantialAdUnitId: interstantialAdUnitId)
-        let request = GADRequest()
-        request.testDevices = [kGADSimulatorID]
+        var testDevices = [kGADSimulatorID]
+        if let testDeviceId = args["testDeviceId"] {
+            testDevices.append(testDeviceId)
+        }
+        request.testDevices = testDevices
         interstantial.load(request)
     }
     
