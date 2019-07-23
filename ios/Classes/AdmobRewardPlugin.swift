@@ -87,9 +87,9 @@ public class AdmobRewardPlugin: NSObject, FlutterPlugin {
     private func loadRewardBasedVideoAd(_ args: [String: Any], id: Int, rewardBasedVideoAdUnitId: String) {
         let interstantial = getRewardBasedVideoAd(id: id)
         let request = GADRequest()
-        var testDevices = [kGADSimulatorID]
+        var testDevices: [AnyObject] = [kGADSimulatorID]
         if let testDeviceId = args["testDeviceId"] as? String {
-            testDevices.append(testDeviceId)
+            testDevices.append(testDeviceId as AnyObject)
         }
         request.testDevices = testDevices
         interstantial.load(request, withAdUnitID: rewardBasedVideoAdUnitId)

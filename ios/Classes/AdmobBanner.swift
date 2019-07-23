@@ -73,9 +73,9 @@ class AdmobBanner : NSObject, FlutterPlatformView {
     fileprivate func requestAd() {
         if let ad = getBannerAdView() {
             let request = GADRequest()
-            var testDevices = [kGADSimulatorID]
+            var testDevices: [AnyObject] = [kGADSimulatorID]
             if let testDeviceId = self.args["testDeviceId"] as? String {
-                testDevices.append(testDeviceId)
+                testDevices.append(testDeviceId as AnyObject)
             }
             request.testDevices = testDevices
             ad.load(request)
