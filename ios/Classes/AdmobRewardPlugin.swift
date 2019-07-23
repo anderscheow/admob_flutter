@@ -88,7 +88,7 @@ public class AdmobRewardPlugin: NSObject, FlutterPlugin {
         let interstantial = getRewardBasedVideoAd(id: id)
         let request = GADRequest()
         var testDevices = [kGADSimulatorID]
-        if let testDeviceId = args["testDeviceId"] {
+        if let testDeviceId = args["testDeviceId"] as? String {
             testDevices.append(testDeviceId)
         }
         request.testDevices = testDevices

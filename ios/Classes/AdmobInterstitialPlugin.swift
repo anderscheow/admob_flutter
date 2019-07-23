@@ -79,8 +79,9 @@ public class AdmobIntersitialPlugin: NSObject, FlutterPlugin {
     
     private func loadInterstantialAd(_ args: [String: Any], id: Int, interstantialAdUnitId: String) {
         let interstantial = getInterstitialAd(id: id, interstantialAdUnitId: interstantialAdUnitId)
+        let request = GADRequest()
         var testDevices = [kGADSimulatorID]
-        if let testDeviceId = args["testDeviceId"] {
+        if let testDeviceId = args["testDeviceId"] as? String {
             testDevices.append(testDeviceId)
         }
         request.testDevices = testDevices
